@@ -9,7 +9,7 @@
 
 ///<reference types = "cypress"/> 
 
-it('selenium_foum_test', ()=>{
+it('Valid data', ()=>{
     cy.visit('https://the-internet.herokuapp.com/login');
 
     cy.get('[type="text"]').type('tomsmith');
@@ -17,9 +17,9 @@ it('selenium_foum_test', ()=>{
 
     cy.get ('.fa').click();
     cy.get('.flash.success').contains('You logged into a secure area').should('exist')  
-})
+});
 
-it('selenium_foum_test', ()=>{
+it('Invalid data', ()=>{
     cy.visit('https://the-internet.herokuapp.com/login');
 
     cy.get('[type="text"]').type('notTomsmith');
@@ -27,11 +27,17 @@ it('selenium_foum_test', ()=>{
 
     cy.get ('.fa').click();
     cy.get('.flash.error').contains('Your username is invalid').should('exist');  
-})
+});
 
-it('selenium_foum_test', ()=>{
+it('Log out', ()=>{
     cy.visit('https://the-internet.herokuapp.com/login');
 
+    cy.get('[type="text"]').type('tomsmith');
+    cy.get('[type="password"]').type('SuperSecretPassword!');
+    cy.get ('.fa').click();
     cy.get('.icon-2x.icon-signout').click();
     cy.get('.flash.success').contains('You logged out of the secure area!').should('exist')
-})
+});
+
+
+
